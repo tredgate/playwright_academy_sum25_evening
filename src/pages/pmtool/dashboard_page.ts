@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { LoginPage } from "./login_page";
 
 export class DashboardPage {
   //properties
@@ -14,17 +15,20 @@ export class DashboardPage {
   }
 
   //methods
-  async clickProfile() {
+  async clickProfile(): Promise<this> {
     await this.page.waitForTimeout(600); //pridávanie hard coded čakania aby sa "načítala" komponenta
     await this.profileButton.click();
+    return this;
   }
 
-  async clickLogoutButton() {
+  async clickLogoutButton(): Promise<LoginPage> {
     await this.logoutButton.click();
+    return new LoginPage(this.page);
   }
 
-  async logout() {
+  async logout(): Promise<LoginPage> {
     await this.clickProfile();
     await this.clickLogoutButton();
+    return new LoginPage(this.page);
   }
 }
