@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { expect, Locator, Page, test } from "@playwright/test";
 import { DashboardPage } from "./dashboard_page";
 import { LostPasswordPage } from "./lost_password_page";
 
@@ -9,6 +9,7 @@ export class LoginPage {
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
   readonly forgottenPasswordAnchor: Locator;
+  readonly pageHeader: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +17,7 @@ export class LoginPage {
     this.passwordInput = page.locator("#password");
     this.loginButton = page.locator(".btn");
     this.forgottenPasswordAnchor = page.locator("#forget_password");
+    this.pageHeader = page.locator(".form-title");
   }
 
   async openPmtool(): Promise<this> {
@@ -39,14 +41,22 @@ export class LoginPage {
   }
 
   async login(username: string, password: string): Promise<DashboardPage> {
-    await this.fillUsername(username);
-    await this.fillPassword(password);
-    await this.clickLogin();
+    await test.step("Login to Pmtool", async () => {
+      await this.fillUsername(username);
+      await this.fillPassword(password);
+      await this.clickLogin();
+    });
+
     return new DashboardPage(this.page);
   }
 
   async clickPasswordForgotten(): Promise<LostPasswordPage> {
     await this.forgottenPasswordAnchor.click();
     return new LostPasswordPage(this.page);
+  }
+
+  async pageHeaderHasText(headerText: string): Promise<LoginPage> {
+    await expect(this.pageHeader).toHaveText(headerText);
+    return this;
   }
 }
