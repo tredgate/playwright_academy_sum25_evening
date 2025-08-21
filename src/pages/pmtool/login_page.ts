@@ -1,6 +1,6 @@
 import { expect, Locator, Page, test } from "@playwright/test";
 import { DashboardPage } from "./dashboard_page";
-import { LostPasswordPage } from "./lost_password_page";
+import { LostPasswordPage } from "./lost_password_page.ts";
 
 export class LoginPage {
   readonly page: Page;
