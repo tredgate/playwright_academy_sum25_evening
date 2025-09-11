@@ -1,6 +1,3 @@
-//tests/learning/fluent-interface
-//fluent_api_login_tests.spec.ts
-
 import { test } from "@playwright/test";
 import { LoginPage } from "src/pages/pmtool/login_page";
 
