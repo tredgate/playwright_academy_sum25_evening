@@ -1,7 +1,3 @@
-/*
-tests/learning/test-structure
-nested_describe.spec.ts
-*/
 import { expect, test } from "@playwright/test";
 import { LoginPage } from "../../../src/pages/pmtool/login_page.ts";
 

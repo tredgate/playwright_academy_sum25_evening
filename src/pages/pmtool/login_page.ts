@@ -41,6 +41,12 @@ export class LoginPage {
   }
 
   async login(username: string, password: string): Promise<DashboardPage> {
+    await test.step("Login Page Visual Check", async () => {
+      await expect.soft(this.page).toHaveScreenshot("login_page_empty.png", {
+        fullPage: true,
+      });
+    });
+
     await test.step("Login to Pmtool", async () => {
       await this.fillUsername(username);
       await this.fillPassword(password);
