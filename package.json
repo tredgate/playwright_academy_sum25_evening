@@ -6,7 +6,9 @@
   "scripts": {
     "test": "playwright test",
     "ui": "playwright test --ui",
-    "test:chrome": "playwright test --project=chromium"
+    "test:chrome": "playwright test --project=chromium",
+    "ui:cs": "cross-env TEST_LANGUAGE=cs playwright test --ui",
+    "ui:en": "cross-env TEST_LANGUAGE=en playwright test --ui"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +25,7 @@
     "typescript-eslint": "^8.39.0"
   },
   "dependencies": {
+    "cross-env": "^10.1.0",
     "dayjs": "^1.11.18",
     "dotenv": "^17.2.2"
   }

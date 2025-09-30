@@ -2,6 +2,8 @@
 // src/api/tegb
 
 import { APIRequestContext } from "@playwright/test";
+import { fakerCS_CZ as faker } from "@faker-js/faker";
+import { UserData } from "../../../tests/learning/bonus/types.spec.ts";
 
 export class UserApi {
   readonly request: APIRequestContext;
@@ -20,6 +22,17 @@ export class UserApi {
       },
     });
     return response;
+  }
+
+  static generateUser(): UserData {
+    return {
+      username: faker.internet.username(),
+      email: faker.internet.exampleEmail(),
+      firstName: faker.person.firstName(),
+      accountBalance: faker.number.int({ min: 0, max: 250_000 }),
+      lastName: faker.person.lastName(),
+      role: "manager",
+    };
   }
 
   async loginUser(username: string, password: string) {

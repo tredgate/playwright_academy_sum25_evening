@@ -1,6 +1,7 @@
 import { expect, Locator, Page, test } from "@playwright/test";
 import { DashboardPage } from "./dashboard_page";
 import { LostPasswordPage } from "./lost_password_page.ts";
+import { Credentials } from "../../types/types.ts";
 
 export class LoginPage {
   readonly page: Page;
@@ -54,6 +55,10 @@ export class LoginPage {
     });
 
     return new DashboardPage(this.page);
+  }
+
+  async loginCreds(credentials: Credentials) {
+    return await this.login(credentials.username, credentials.password);
   }
 
   async clickPasswordForgotten(): Promise<LostPasswordPage> {
